@@ -51,7 +51,11 @@ class App extends React.Component {
           this.state.usuario ? <Home /> : <Redirect to="/login" />
         )} />
 
-        <Route path="/login" component={Login} />
+        <Route path="/login" render={props => (
+          <Login onEnviarClick={this.logaUsuario}
+          historico={props.history} />
+        )} />
+
         <Route path="/conta" component={Conta} />
         <Route path="/contato" component={Contato} />
         <Route path="/quem-somos" component={QuemSomos} />

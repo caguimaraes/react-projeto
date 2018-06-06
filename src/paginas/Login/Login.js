@@ -5,6 +5,11 @@ import Botao from '../../componentes/Formulario/Botao/Botao'
 import Link from '../../componentes/Formulario/Link/Link'
 import './Login.css'
 
+// const props = {
+//     onEnviarClick: () =>{
+//         // Faz Alguma coisa
+//     }
+// }
 
 class Login extends React.Component {
     constructor(props) {
@@ -35,6 +40,9 @@ class Login extends React.Component {
         if(!estaDesabilitado) {
             // To Do: Enviar dados para a API
             console.log("usuario", usuario)
+            
+            this.props.onEnviarClick()
+            this.props.historico.push('/')
         }
     }
 
