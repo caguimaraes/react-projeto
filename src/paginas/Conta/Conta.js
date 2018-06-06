@@ -64,7 +64,7 @@ class Conta extends React.Component {
 
         return (
             <div className="login">
-                <Formulario titulo="Login" texto="Entre com seu email e senha." onSubmit={this.handleSubmit}>
+                <Formulario titulo="Criar uma conta" texto="Preencha o formulário abaixo:" onSubmit={this.handleSubmit}>
                     <Grupo erro={this.state.email.erro}>
                         <Grupo.Legenda htmlFor="email">
                             Email:
@@ -99,7 +99,7 @@ class Conta extends React.Component {
                     </Botao>
 
                     <Link to="/login">
-                        Criar uma conta
+                        Fazer Login
                     </Link>
                 </Formulario>
             </div>
