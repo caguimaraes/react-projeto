@@ -11,6 +11,14 @@ class Conta extends React.Component {
         super(props)
 
         this.state = {
+            nome: {
+                valor: '',
+                erro: '',
+            },
+            telefone: {
+                valor: '',
+                erro: '',
+            },
             email: {
                 valor: '',
                 erro: '',
@@ -18,7 +26,7 @@ class Conta extends React.Component {
             senha: {
                 valor: '',
                 erro: '',
-            }
+            }            
         }
     }
 
@@ -26,6 +34,8 @@ class Conta extends React.Component {
         e.preventDefault()
 
         const usuario = {
+            nome: this.state.nome.valor,
+            telefone: this.state.telefone.valor,
             email: this.state.email.valor,
             senha: this.state.senha.valor
         }
@@ -52,7 +62,11 @@ class Conta extends React.Component {
     }
 
     deveDesabilitaFormulario() {
-        return !this.state.email.valor ||
+        return !this.state.nome.valor ||
+                this.state.nome.erro ||
+                 !this.state.telefone.valor ||
+                this.state.telefone.erro ||
+             !this.state.email.valor ||
                 this.state.email.erro ||
                 !this.state.senha.valor ||
                 this.state.senha.erro
@@ -65,6 +79,32 @@ class Conta extends React.Component {
         return (
             <div className="login">
                 <Formulario titulo="Criar uma conta" texto="Preencha o formulário abaixo:" onSubmit={this.handleSubmit}>
+                    <Grupo erro={this.state.nome.erro}>
+                        <Grupo.Legenda htmlFor="nome">
+                            Nome:
+                        </Grupo.Legenda>
+                        <Grupo.CaixaTexto 
+                            id="nome" 
+                            name="nome" 
+                            type="text" 
+                            placeholder="Nome"
+                            required={true}
+                            onChange={this.handleChange} 
+                        />
+                    </Grupo>
+                    <Grupo erro={this.state.telefone.erro}>
+                        <Grupo.Legenda htmlFor="Telefone">
+                            Telefone:
+                        </Grupo.Legenda>
+                        <Grupo.CaixaTexto 
+                            id="telefone" 
+                            name="telefone" 
+                            type="text" 
+                            placeholder="Telefone"
+                            required={true}
+                            onChange={this.handleChange} 
+                        />
+                    </Grupo>
                     <Grupo erro={this.state.email.erro}>
                         <Grupo.Legenda htmlFor="email">
                             Email:

@@ -21,8 +21,13 @@
     display: flex;
     align-items: center;
     padding: 0;
+    text-decoration: none;
 }
 
 .navbar-links li + li {
     margin-left: 1rem;
+}
+
+.navbar-links__ativo {
+    border-bottom: 2px solid #9351b4;
 }

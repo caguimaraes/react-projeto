@@ -2,8 +2,10 @@ import React from 'react'
 import Navbar from './componentes/Navbar/Navbar'
 import Login from './paginas/Login/Login'
 import Conta from './paginas/Conta/Conta'
+import Contato from './paginas/Contato/Contato'
 import QuemSomos from './paginas/QuemSomos/QuemSomos'
-import { Route, Switch } from 'react-router-dom'
+import Home from './paginas/Home/Home'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css'
 
 
@@ -31,14 +33,27 @@ class App extends React.Component {
       <div className="App">
         <Navbar 
           usuario={this.state.usuario} 
-          logaUsuario={this.logaUsuario} 
-          deslogaUsuario={this.deslogaUsuario}
+          onSairClick={this.deslogaUsuario}
         />
 
       <Switch>
-        <Route exact path="/" component={Login} />
+        {/* FUNÇÃO PARA FORÇAR A PESSOA ESTAR LOGADA PARA VER A PÁGINA HOME - POST IT
+
+        {/* <Route exact path="/" render={props => {
+          if (this.state.usuario) {
+            return <Home />
+          } else {
+            return <Redirect to="/login" />
+          }
+        }} /> */}
+
+        <Route exact path="/" render={props => (
+          this.state.usuario ? <Home /> : <Redirect to="/login" />
+        )} />
+
         <Route path="/login" component={Login} />
         <Route path="/conta" component={Conta} />
+        <Route path="/contato" component={Contato} />
         <Route path="/quem-somos" component={QuemSomos} />
       </Switch>
       </div>
