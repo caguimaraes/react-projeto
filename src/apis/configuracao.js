@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const configuracoes = {   
-        baseURL: 'https://reprograma-postit-api.heroku.com/',
+        baseURL: 'https://reprograma-postit-api.herokuapp.com/',
         timeout: 1000,
 }
 
@@ -13,6 +13,6 @@ if (usuario) {
     }
 }
 
-const protocoloHTTP = axios.create(configuracoes)
+const protocolo = axios.create(configuracoes)
 
 export default protocolo
