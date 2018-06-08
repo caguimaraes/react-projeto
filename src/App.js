@@ -1,15 +1,23 @@
 import React from 'react'
 import Navbar from './componentes/Navbar/Navbar'
+import Home from './paginas/Home/Home'
 import Login from './paginas/Login/Login'
 import Conta from './paginas/Conta/Conta'
 import Contato from './paginas/Contato/Contato'
 import QuemSomos from './paginas/QuemSomos/QuemSomos'
-import Home from './paginas/Home/Home'
+import NaoEncontrada from './paginas/NaoEncontrada/NaoEncontrada'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css'
 
-
-// O app é como se fosse o body do HTML
+/* 
+<Route exact path="/" render={props => {
+  if (this.state.usuario) {
+    return <Home />
+  } else {
+    return <Redirect to="/login" />
+  }
+}} />
+*/
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -30,36 +38,29 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Navbar 
-          usuario={this.state.usuario} 
+          usuario={this.state.usuario}
           onSairClick={this.deslogaUsuario}
         />
 
-      <Switch>
-        {/* FUNÇÃO PARA FORÇAR A PESSOA ESTAR LOGADA PARA VER A PÁGINA HOME - POST IT
+        <Switch>
+          <Route exact path="/" render={props => (
+            this.state.usuario ? <Home /> : <Redirect to="/login" />
+          )} />
 
-        {/* <Route exact path="/" render={props => {
-          if (this.state.usuario) {
-            return <Home />
-          } else {
-            return <Redirect to="/login" />
-          }
-        }} /> */}
-
-        <Route exact path="/" render={props => (
-          this.state.usuario ? <Home /> : <Redirect to="/login" />
-        )} />
-
-        <Route path="/login" render={props => (
-          <Login onEnviarClick={this.logaUsuario}
-          historico={props.history} />
-        )} />
-
-        <Route path="/conta" component={Conta} />
-        <Route path="/contato" component={Contato} />
-        <Route path="/quem-somos" component={QuemSomos} />
-      </Switch>
+          <Route path="/login" render={props => (
+            <Login 
+              onEnviarClick={this.logaUsuario} 
+              historico={props.history} 
+            />
+          )} />
+          
+          <Route path="/conta" component={Conta} />
+          <Route path="/contato" component={Contato} />
+          <Route path="/quem-somos" component={QuemSomos} />
+          <Route component={NaoEncontrada} />
+        </Switch>
       </div>
     );
   }

@@ -5,9 +5,11 @@ import Botao from '../../componentes/Formulario/Botao/Botao'
 import Link from '../../componentes/Formulario/Link/Link'
 import './Login.css'
 
+
 // const props = {
-//     onEnviarClick: () =>{
-//         // Faz Alguma coisa
+//     historico: {},
+//     onEnviarClick: () => {
+//         // faz alguma coisa
 //     }
 // }
 
@@ -18,11 +20,11 @@ class Login extends React.Component {
         this.state = {
             email: {
                 valor: '',
-                erro: '',
+                erro: ''
             },
             senha: {
                 valor: '',
-                erro: '',
+                erro: ''
             }
         }
     }
@@ -37,13 +39,15 @@ class Login extends React.Component {
 
         const estaDesabilitado = this.estaDesabilitado()
 
-        if(!estaDesabilitado) {
-            // To Do: Enviar dados para a API
+        if (!estaDesabilitado) {
+            // TODO: enviar dados para a API
             console.log("usuario", usuario)
             
+
             this.props.onEnviarClick()
             this.props.historico.push('/')
         }
+        
     }
 
     handleChange = (nomeDoInput, valorDoInput, erro = '') => {
@@ -52,27 +56,30 @@ class Login extends React.Component {
         // console.log('erro: ', erro)
 
         this.setState({
-            [nomeDoInput] : {
+            [nomeDoInput]: {
                 valor: valorDoInput,
                 erro: erro
             }
         })
     }
 
-    deveDesabilitaFormulario() {
+    estaDesabilitado() {
         return !this.state.email.valor ||
                 this.state.email.erro ||
-                !this.state.senha.valor ||
+               !this.state.senha.valor ||
                 this.state.senha.erro
     }
 
-    
     render() {
-        const desabilitado = this.deveDesabilitaFormulario()
+        const estaDesabilitado = this.estaDesabilitado()
 
         return (
             <div className="login">
-                <Formulario titulo="Login" texto="Entre com seu email e senha." onSubmit={this.handleSubmit}>
+                <Formulario 
+                    titulo="Login" 
+                    texto="Entre com seu email e senha."
+                    onSubmit={this.handleSubmit}
+                >
                     <Grupo erro={this.state.email.erro}>
                         <Grupo.Legenda htmlFor="email">
                             Email:
@@ -95,14 +102,14 @@ class Login extends React.Component {
                             id="senha" 
                             name="senha" 
                             type="password" 
-                            placeholder="senha"
+                            placeholder="Senha"
                             minLength={6}
                             required={true}
                             onChange={this.handleChange} 
                         />
                     </Grupo>
 
-                    <Botao desabilitado={desabilitado}>
+                    <Botao desabilitado={estaDesabilitado}>
                         Enviar
                     </Botao>
 

@@ -13,20 +13,20 @@ class Conta extends React.Component {
         this.state = {
             nome: {
                 valor: '',
-                erro: '',
+                erro: ''
             },
             telefone: {
                 valor: '',
-                erro: '',
+                erro: ''
             },
             email: {
                 valor: '',
-                erro: '',
+                erro: ''
             },
             senha: {
                 valor: '',
-                erro: '',
-            }            
+                erro: ''
+            }
         }
     }
 
@@ -42,10 +42,11 @@ class Conta extends React.Component {
 
         const estaDesabilitado = this.estaDesabilitado()
 
-        if(!estaDesabilitado) {
-            // To Do: Enviar dados para a API
+        if (!estaDesabilitado) {
+            // TODO: enviar dados para a API
             console.log("usuario", usuario)
         }
+        
     }
 
     handleChange = (nomeDoInput, valorDoInput, erro = '') => {
@@ -54,31 +55,34 @@ class Conta extends React.Component {
         // console.log('erro: ', erro)
 
         this.setState({
-            [nomeDoInput] : {
+            [nomeDoInput]: {
                 valor: valorDoInput,
                 erro: erro
             }
         })
     }
 
-    deveDesabilitaFormulario() {
+    estaDesabilitado() {
         return !this.state.nome.valor ||
                 this.state.nome.erro ||
-                 !this.state.telefone.valor ||
+               !this.state.telefone.valor ||
                 this.state.telefone.erro ||
-             !this.state.email.valor ||
+               !this.state.email.valor ||
                 this.state.email.erro ||
-                !this.state.senha.valor ||
+               !this.state.senha.valor ||
                 this.state.senha.erro
     }
 
-    
     render() {
-        const desabilitado = this.deveDesabilitaFormulario()
+        const estaDesabilitado = this.estaDesabilitado()
 
         return (
-            <div className="login">
-                <Formulario titulo="Criar uma conta" texto="Preencha o formulário abaixo:" onSubmit={this.handleSubmit}>
+            <div className="conta">
+                <Formulario 
+                    titulo="Conta" 
+                    texto="Envie o formulário para criar uma conta!"
+                    onSubmit={this.handleSubmit}
+                >
                     <Grupo erro={this.state.nome.erro}>
                         <Grupo.Legenda htmlFor="nome">
                             Nome:
@@ -89,11 +93,13 @@ class Conta extends React.Component {
                             type="text" 
                             placeholder="Nome"
                             required={true}
+                            minLength={10}
                             onChange={this.handleChange} 
                         />
                     </Grupo>
+
                     <Grupo erro={this.state.telefone.erro}>
-                        <Grupo.Legenda htmlFor="Telefone">
+                        <Grupo.Legenda htmlFor="telefone">
                             Telefone:
                         </Grupo.Legenda>
                         <Grupo.CaixaTexto 
@@ -105,6 +111,7 @@ class Conta extends React.Component {
                             onChange={this.handleChange} 
                         />
                     </Grupo>
+
                     <Grupo erro={this.state.email.erro}>
                         <Grupo.Legenda htmlFor="email">
                             Email:
@@ -127,19 +134,19 @@ class Conta extends React.Component {
                             id="senha" 
                             name="senha" 
                             type="password" 
-                            placeholder="senha"
+                            placeholder="Senha"
                             minLength={6}
                             required={true}
                             onChange={this.handleChange} 
                         />
                     </Grupo>
 
-                    <Botao desabilitado={desabilitado}>
+                    <Botao desabilitado={estaDesabilitado}>
                         Enviar
                     </Botao>
 
                     <Link to="/login">
-                        Fazer Login
+                        Fazer login
                     </Link>
                 </Formulario>
             </div>
