@@ -13,16 +13,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         // TODO: buscar lista de postit
-        apiPostit.getPostits()
-            .then(response => {
-                this.setState({
-                    postits: response.data.postits,
-                    carregando: false
-                })
-            })
-            .catch(error => {
-                alert(error.response.data.erro)
-            })
+       // CHAMAR A AÇÃO QUE DISPARA O MOUNT 
     }
 
     adicionaPostit = (novoPostit) => {
